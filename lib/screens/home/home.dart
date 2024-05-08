@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:my_template/components/custom_modal_sheet.dart';
 import 'package:my_template/config/config_export.dart';
 
 class MyHomePage extends StatefulWidget {
@@ -34,6 +35,11 @@ class _MyHomePageState extends State<MyHomePage> {
               onPressed: () {}, child: const Text('Animated Dialog')),
           ElevatedButton(
               onPressed: () {}, child: const Text('Animated Bottom Sheet')),
+          ElevatedButton(
+              onPressed: () {
+                const CustomModalSheet().show(context);
+              },
+              child: const Text('Animated Bottom Sheet')),
         ],
       ),
     );
