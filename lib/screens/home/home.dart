@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:my_template/components/custom_modal_sheet.dart';
 import 'package:my_template/config/config_export.dart';
+import 'package:my_template/screens/home/behance_profile.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
@@ -28,19 +29,27 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         ],
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          ElevatedButton(
-              onPressed: () {}, child: const Text('Animated Dialog')),
-          ElevatedButton(
-              onPressed: () {}, child: const Text('Animated Bottom Sheet')),
-          ElevatedButton(
-              onPressed: () {
-                const CustomModalSheet().show(context);
-              },
-              child: const Text('Animated Bottom Sheet')),
-        ],
+      body: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (_) => const BehanceProfile()));
+                },
+                child: const Text('Behance Style Appbar')),
+            ElevatedButton(
+                onPressed: () {}, child: const Text('Animated Bottom Sheet')),
+            ElevatedButton(
+                onPressed: () {
+                  const CustomModalSheet().show(context);
+                },
+                child: const Text('Animated Bottom Sheet')),
+          ],
+        ),
       ),
     );
   }
