@@ -4,6 +4,8 @@ import 'dart:typed_data';
 import 'dart:developer' as dev;
 import 'package:file_picker/file_picker.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:path/path.dart' as path;
+import 'package:path_provider/path_provider.dart';
 
 //Combination of 2 packages
 class FileImagePicker {
@@ -45,10 +47,16 @@ class ImageConverter {
     return base64Encode(fileBytes);
   }
 
-  static XFile toXfile(
-      {required Uint8List bytes, required String mimeType, String? fileName}) {
+  static Future<XFile> toXfile(
+      {required Uint8List bytes,
+      required String mimeType,
+      String? fileName}) async {
+    final tempDir = await getTemporaryDirectory();
     final tempName = fileName ?? "attachment.${mimeType.split("/").last}";
-    return XFile.fromData(bytes, mimeType: mimeType, name: tempName);
+    final tempPath = path.join(tempDir.path, tempName);
+
+    final tempFile = await File(tempPath).writeAsBytes(bytes);
+    return XFile(tempFile.path, mimeType: mimeType, name: tempName);
   }
 
   Future<Uint8List?> toUint8List() async {
