@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:my_template/core/app_info.dart';
+import 'package:my_template/core/device_auth.dart';
 import 'package:my_template/core/easyloading_config.dart';
 import 'package:my_template/data/api-manager/api_client.dart';
 import 'config/config_export.dart';
@@ -18,6 +19,7 @@ Future<void> main() async {
   await HiveBoxPreference.init();
   await ApiClient.init("base_url");
   await AppInfo.init();
+  await DeviceAuth().init();
   runApp(MultiBlocProvider(
     providers: AppBloc.listOfBloc,
     child: const MyApp(),

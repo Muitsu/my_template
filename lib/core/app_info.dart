@@ -20,5 +20,3 @@ class AppInfo {
   String get version => _packageInfo?.version ?? '';
   String get buildNumber => _packageInfo?.buildNumber ?? '';
 }
-
-final appInfo = AppInfo();
