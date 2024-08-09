@@ -5,6 +5,8 @@ import 'package:my_template/config/config_export.dart';
 import 'package:my_template/core/device_auth.dart';
 import 'package:my_template/screens/home/behance_profile.dart';
 
+import '../../components/hour_countdown.dart';
+
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
 
@@ -34,6 +36,16 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            HourCountdown(
+              times: [
+                DateTime.parse("2024-08-09 05:00:00.000"),
+                DateTime.parse("2024-08-09 13:00:00.000"),
+                DateTime.parse("2024-08-09 15:00:00.000"),
+                DateTime.parse("2024-08-09 18:00:00.000"),
+                DateTime.parse("2024-08-09 23:00:00.000"),
+                DateTime.parse("2024-08-10 05:00:00.000"),
+              ],
+            ),
             ElevatedButton(
                 onPressed: () {
                   Navigator.push(
