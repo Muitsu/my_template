@@ -1,6 +1,8 @@
 import 'dart:convert';
+import 'dart:typed_data';
 import 'package:http/http.dart' as http;
 import "dart:developer" as dev;
+import 'package:http_parser/http_parser.dart';
 
 class ApiClient {
   static final ApiClient _instance = ApiClient._internal();
@@ -94,13 +96,13 @@ class ApiClient {
     return response;
   }
 
-  Future<http.Response> uploadFile(
-      {String? baseUrl,
+  Future<http.Response> postFormData(
+      {required String endpoint,
       required List<http.MultipartFile> files,
-      required String endpoint,
+      Map<String, String>? body,
+      String? baseUrl,
       String? authToken,
       bool includeToken = true,
-      Map<String, String>? body,
       Map<String, String>? headers}) async {
     final getToken = getAuthToken(includeToken);
     final token = includeToken ? (authToken ?? getToken) : null;
@@ -112,12 +114,46 @@ class ApiClient {
     if (body != null) {
       request.fields.addAll(body);
     }
-    for (var file in files) {
-      request.files.add(file);
+    if (files.isNotEmpty) {
+      request.files.addAll(files);
     }
 
     final response = await http.Response.fromStream(await request.send());
+
+    if (response.statusCode != 200) {
+      // Log or handle error case
+      dev.log("Error uploading: ${response.statusCode}, ${response.body}");
+      throw Exception(response.body);
+    }
+
     return response;
+  }
+
+  http.MultipartFile emptyMultipartFile({required String fieldName}) {
+    return http.MultipartFile.fromBytes(
+      fieldName,
+      [],
+      filename: '',
+      contentType: MediaType('image', 'jpg'),
+    );
+  }
+
+  http.MultipartFile bytesToMultipartFile({
+    required String fieldName,
+    required Uint8List bytes,
+    String? filename,
+  }) {
+    int length = bytes.length;
+    Stream<List<int>> byteStream = Stream.fromIterable([bytes]);
+    http.ByteStream stream = http.ByteStream(byteStream);
+    filename = filename ?? 'image.jpg';
+    dev.log("${(length / 1024) / 1024} mb");
+    return http.MultipartFile(
+      fieldName,
+      stream,
+      length,
+      filename: filename,
+    );
   }
 
   Future<Map<String, String>> _mergeHeaders(
