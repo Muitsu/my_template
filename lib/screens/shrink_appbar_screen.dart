@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:my_template/components/modal/custom_modal_sheet.dart';
 import 'package:my_template/components/modal/sliver_overlap_builder.dart';
+import 'package:my_template/core/mobile_info.dart';
 
-import '../components/shrink_text_appbar.dart';
+import '../components/appbar/shrink_text_appbar.dart';
 
 class ShrinkAppbarScreen extends StatefulWidget {
   const ShrinkAppbarScreen({super.key});
@@ -99,18 +100,19 @@ class _ShrinkAppbarScreenState extends State<ShrinkAppbarScreen> {
                       children: [
                         const CircleAvatar(radius: 30),
                         const SizedBox(height: 10),
-                        const Text(
-                          "Xiaomi 15",
-                          style: TextStyle(
+                        Text(
+                          MobileInfo.deviceName,
+                          style: const TextStyle(
                               color: Colors.white,
                               fontSize: 18,
                               fontWeight: FontWeight.bold),
                         ),
                         const SizedBox(height: 12),
                         _simpleTile(
-                            title: "Model", subtitle: "Xiaomi 2315455C"),
+                            title: "Model", subtitle: MobileInfo.deviceModel),
                         _simpleTile(
-                            title: "OS Version", subtitle: "Android 15"),
+                            title: "OS Version",
+                            subtitle: MobileInfo.deviceOSVersion),
                         _simpleTile(
                             title: "Activation Name",
                             subtitle: "15 May 2025, 9:08 am"),

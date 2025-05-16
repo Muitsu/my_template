@@ -1,17 +1,25 @@
 import 'dart:io';
-
-import 'package:cunning_document_scanner/cunning_document_scanner.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter/material.dart';
+import 'package:google_mlkit_document_scanner/google_mlkit_document_scanner.dart';
 
 class DocScanner {
   static Future<Uint8List?> openScanner({int bulkImages = 1}) async {
     List<String> pictures;
     try {
-      pictures =
-          await CunningDocumentScanner.getPictures(noOfPages: bulkImages) ?? [];
+      DocumentScannerOptions documentOptions = DocumentScannerOptions(
+        documentFormat: DocumentFormat.jpeg, // set output document format
+        mode: ScannerMode.filter, // to control what features are enabled
+        pageLimit: 1, // setting a limit to the number of pages scanned
+        isGalleryImport: true, // importing from the photo gallery
+      );
+      final documentScanner = DocumentScanner(options: documentOptions);
+      DocumentScanningResult result = await documentScanner.scanDocument();
+      pictures = result.images;
       final img = await _toUint8List(pictures.first);
       return img;
     } catch (e) {
+      debugPrint(e.toString());
       // Handle exception here
       return null;
     }

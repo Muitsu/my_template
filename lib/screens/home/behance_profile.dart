@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:my_template/components/behance_appbar.dart';
+import 'package:my_template/components/appbar/behance_appbar.dart';
 import 'package:my_template/components/behance_tabbar.dart';
 
 /*REFERENCE: https://github.com/AmirBayat0/flutter_scroll_animation/blob/main/flutter_scroll_animation/lib/pages/home.dart */

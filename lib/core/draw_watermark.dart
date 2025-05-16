@@ -66,7 +66,6 @@ class DrawWatermark {
 /*FUNCTION TO RUN*/
   static Future<Uint8List> bgProcessImg(Uint8List bytes, imag.BitmapFont bitmap,
       [String? textVal, WatermarkSize size = WatermarkSize.small]) async {
-    //Decode byte into image package
     imag.Image imgs = imag.decodeImage(bytes)!;
 
     // Resize the image to the specified dimensions

@@ -4,7 +4,10 @@ import 'package:flutter/material.dart';
 class MobileInfo {
   //Default value
   static String deviceModel = "Unknown";
+  static String deviceManufacturer = "Unknown";
   static String deviceOS = 'Unknown';
+  static String deviceOSVersion = 'Unknown';
+  static String deviceName = "Unknown";
 
   MobileInfo._();
 
@@ -13,9 +16,14 @@ class MobileInfo {
   static MobileInfo get instance => _instance;
 
   static Future<void> init(BuildContext context) async {
-    TargetPlatform platform = Theme.of(context).platform;
-    deviceModel = await _getDeviceModel(platform: platform);
-    deviceOS = await _getDeviceOS(platform: platform);
+    WidgetsBinding.instance.addPostFrameCallback((e) async {
+      TargetPlatform platform = Theme.of(context).platform;
+      deviceModel = await _getDeviceModel(platform: platform);
+      deviceOS = _getDeviceOS(platform: platform);
+      deviceOSVersion = await _getDeviceOSVersion(platform: platform);
+      deviceManufacturer = await _getDeviceManufacturer(platform: platform);
+      deviceName = "$deviceManufacturer $deviceModel";
+    });
   }
 
   static Future<String> _getDeviceModel(
@@ -28,24 +36,31 @@ class MobileInfo {
             : 'Unknown';
   }
 
-  static Future<String> _getDeviceOS({required TargetPlatform platform}) async {
-    String result = "";
+  static String _getDeviceOS({required TargetPlatform platform}) {
     final mobileInfo = {
       TargetPlatform.android: "Android",
       TargetPlatform.iOS: "iOS"
     };
-    result = mobileInfo[platform] ?? "Unknown";
+    return mobileInfo[platform] ?? "Unknown";
+  }
 
-    if (result != "Unknown" && result == "Android") {
-      DeviceInfoPlugin devInfo = DeviceInfoPlugin();
-      final androidInfo = await devInfo.androidInfo;
-      final manufacturer = androidInfo.manufacturer.toLowerCase();
-      final brand = androidInfo.brand.toLowerCase();
-      bool isHuawei =
-          manufacturer.contains("huawei") || brand.contains("huawei");
-      result = isHuawei ? "Huawei" : result;
-    }
+  static Future<String> _getDeviceOSVersion(
+      {required TargetPlatform platform}) async {
+    DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
+    return platform == TargetPlatform.android
+        ? "Android ${(await deviceInfo.androidInfo).version.release}"
+        : platform == TargetPlatform.iOS
+            ? "iOS ${(await deviceInfo.iosInfo).systemVersion}"
+            : 'Unknown';
+  }
 
-    return result;
+  static Future<String> _getDeviceManufacturer(
+      {required TargetPlatform platform}) async {
+    DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
+    return platform == TargetPlatform.android
+        ? (await deviceInfo.androidInfo).manufacturer
+        : platform == TargetPlatform.iOS
+            ? (await deviceInfo.iosInfo).name
+            : 'Unknown';
   }
 }

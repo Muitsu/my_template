@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:my_template/components/connectivity_widget.dart';
 import 'package:my_template/components/modal/custom_draggable_sheet.dart';
 import 'package:my_template/config/config_export.dart';
+import 'package:my_template/core/connectivity_helper.dart';
 import 'package:my_template/core/date_format.dart';
 import 'package:my_template/core/device_auth.dart';
+import 'package:my_template/core/mobile_info.dart';
 import 'package:my_template/screens/home/behance_profile.dart';
+import 'package:my_template/screens/no_internet_template.dart';
 import 'package:my_template/screens/shrink_appbar_screen.dart';
 
 import '../../components/hour_countdown.dart';
@@ -19,78 +23,93 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  @override
+  void initState() {
+    super.initState();
+    MobileInfo.init(context);
+  }
+
   String dateNow = FormatDate.formatTo(
       date: DateTime.now().toString(), format: "yyyy-MM-dd");
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(widget.title),
-        actions: [
-          Switch.adaptive(
-            value: context.watch<AppThemeCubit>().themeMode == ThemeMode.light,
-            onChanged: (isLightMode) {
-              context.read<AppThemeCubit>().toggleTheme(isLightMode);
-            },
-          ),
-        ],
-      ),
-      body: SingleChildScrollView(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            HourCountdown(
-              times: [
-                DateTime.parse("$dateNow 05:00:00.000"),
-                DateTime.parse("$dateNow 13:00:00.000"),
-                DateTime.parse("$dateNow 15:00:00.000"),
-                DateTime.parse("$dateNow 18:00:00.000"),
-                DateTime.parse("$dateNow 23:00:00.000"),
-                DateTime.parse("$dateNow 05:00:00.000"),
-              ],
+    return ConnectivityWidget(
+      offlineScreen: const NoInternetTemplate(),
+      child: Scaffold(
+        appBar: AppBar(
+          backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+          title: Text(widget.title),
+          actions: [
+            Switch.adaptive(
+              value:
+                  context.watch<AppThemeCubit>().themeMode == ThemeMode.light,
+              onChanged: (isLightMode) {
+                context.read<AppThemeCubit>().toggleTheme(isLightMode);
+              },
             ),
-            ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (_) => const BehanceProfile()));
-                },
-                child: const Text('Behance Style Appbar')),
-            ElevatedButton(
-                onPressed: () {
-                  CustomDraggableSheet.show(
-                      context: context,
-                      useCustomAnimation: true,
-                      builder: (context, sc) {
-                        return TemplateScreen(sc: sc);
-                      });
-                },
-                child: const Text('Animated Bottom Sheet')),
-            ElevatedButton(
-                onPressed: () {
-                  CustomDraggableSheet.show(
-                      context: context,
-                      builder: (context, sc) {
-                        return TemplateScreen(sc: sc);
-                      });
-                },
-                child: const Text('Modal Bottom Sheet')),
-            ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (_) => const ShrinkAppbarScreen()));
-                },
-                child: const Text("Shrink Appbar")),
-            ElevatedButton(
-                onPressed: () {
-                  DeviceAuth().authenticate(enablePIN: true);
-                },
-                child: const Text('Biometric Auth')),
           ],
+        ),
+        body: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              HourCountdown(
+                times: [
+                  DateTime.parse("$dateNow 05:00:00.000"),
+                  DateTime.parse("$dateNow 13:00:00.000"),
+                  DateTime.parse("$dateNow 15:00:00.000"),
+                  DateTime.parse("$dateNow 18:00:00.000"),
+                  DateTime.parse("$dateNow 23:00:00.000"),
+                  DateTime.parse("$dateNow 05:00:00.000"),
+                ],
+              ),
+              ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (_) => const BehanceProfile()));
+                  },
+                  child: const Text('Behance Style Appbar')),
+              ElevatedButton(
+                  onPressed: () {
+                    CustomDraggableSheet.show(
+                        context: context,
+                        useCustomAnimation: true,
+                        builder: (context, sc) {
+                          return TemplateScreen(sc: sc);
+                        });
+                  },
+                  child: const Text('Animated Bottom Sheet')),
+              ElevatedButton(
+                  onPressed: () {
+                    CustomDraggableSheet.show(
+                        context: context,
+                        builder: (context, sc) {
+                          return TemplateScreen(sc: sc);
+                        });
+                  },
+                  child: const Text('Modal Bottom Sheet')),
+              ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (_) => const ShrinkAppbarScreen()));
+                  },
+                  child: const Text("Shrink Appbar")),
+              ElevatedButton(
+                  onPressed: () {
+                    DeviceAuth().authenticate(enablePIN: true);
+                  },
+                  child: const Text('Biometric Auth')),
+              ElevatedButton(
+                  onPressed: () {
+                    ConnectivityHelper.checkingRealtimeConnection();
+                  },
+                  child: const Text('Check internet connection')),
+            ],
+          ),
         ),
       ),
     );
