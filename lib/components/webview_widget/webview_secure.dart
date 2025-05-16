@@ -60,7 +60,7 @@ class _WebviewSecureState extends State<WebviewSecure> {
     Size size = MediaQuery.of(context).size;
     return PopScope(
       canPop: false,
-      onPopInvoked: (didPop) async {
+      onPopInvokedWithResult: (didPop, result) async {
         if (didPop) return;
         if (await _controller.canGoBack()) {
           _controller.goBack();
@@ -68,6 +68,14 @@ class _WebviewSecureState extends State<WebviewSecure> {
           showExitAlert(size);
         }
       },
+      // onPopInvoked: (didPop) async {
+      //   if (didPop) return;
+      //   if (await _controller.canGoBack()) {
+      //     _controller.goBack();
+      //   } else {
+      //     showExitAlert(size);
+      //   }
+      // },
       child: Scaffold(
         appBar: PreferredSize(
             preferredSize:

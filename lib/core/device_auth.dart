@@ -62,7 +62,7 @@ class DeviceAuth {
 
   Future<bool> authenticate({bool enablePIN = false}) async {
     if (!canAuthenticate) {
-      dev.log("Biometric Unavailable", name: debugKey);
+      dev.log("Biometric Unavailable: Not set on device", name: debugKey);
       return false;
     }
     bool authenticated = false;

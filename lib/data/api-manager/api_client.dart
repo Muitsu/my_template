@@ -4,10 +4,12 @@ import 'package:http/http.dart' as http;
 import "dart:developer" as dev;
 import 'package:http_parser/http_parser.dart';
 
+import 'sync_api.dart';
+
 class ApiClient {
   static final ApiClient _instance = ApiClient._internal();
   String? _baseUrl;
-
+  final syncApi = SyncApi();
   factory ApiClient() {
     return _instance;
   }
@@ -39,7 +41,8 @@ class ApiClient {
       String? authToken,
       bool includeToken = true,
       Map<String, String>? headers}) async {
-    final getToken = getAuthToken(includeToken);
+    final getToken =
+        await syncApi.queue(() async => await getAuthToken(includeToken));
     final token = includeToken ? (authToken ?? getToken) : null;
     final header = await _mergeHeaders(headers, token);
     final response = await http
@@ -54,7 +57,8 @@ class ApiClient {
       String? authToken,
       bool includeToken = true,
       Map<String, String>? headers}) async {
-    final getToken = getAuthToken(includeToken);
+    final getToken =
+        await syncApi.queue(() async => await getAuthToken(includeToken));
     final token = includeToken ? (authToken ?? getToken) : null;
     final header = await _mergeHeaders(headers, token);
     final response = await http.post(
@@ -71,7 +75,8 @@ class ApiClient {
       bool includeToken = true,
       String? authToken,
       Map<String, String>? headers}) async {
-    final getToken = getAuthToken(includeToken);
+    final getToken =
+        await syncApi.queue(() async => await getAuthToken(includeToken));
     final token = includeToken ? (authToken ?? getToken) : null;
     final header = await _mergeHeaders(headers, token);
     final response = await http.put(
@@ -87,7 +92,8 @@ class ApiClient {
       String? authToken,
       bool includeToken = true,
       Map<String, String>? headers}) async {
-    final getToken = getAuthToken(includeToken);
+    final getToken =
+        await syncApi.queue(() async => await getAuthToken(includeToken));
     final token = includeToken ? (authToken ?? getToken) : null;
     final header = await _mergeHeaders(headers, token);
     final response = await http.delete(
@@ -104,7 +110,8 @@ class ApiClient {
       String? authToken,
       bool includeToken = true,
       Map<String, String>? headers}) async {
-    final getToken = getAuthToken(includeToken);
+    final getToken =
+        await syncApi.queue(() async => await getAuthToken(includeToken));
     final token = includeToken ? (authToken ?? getToken) : null;
     final header = await _mergeHeaders(headers, token);
 
@@ -169,7 +176,7 @@ class ApiClient {
   }
 
   //GET TOKEN FROM PREFERENCE
-  String? getAuthToken(bool includToken) {
+  Future<String?> getAuthToken(bool includToken) async {
     // if (!includToken) return null;
     // final isExist = LoginPreference().isTokenExist();
     // if (!isExist) return null;
