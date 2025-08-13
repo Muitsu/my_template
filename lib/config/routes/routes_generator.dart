@@ -3,7 +3,14 @@ import '/../config/config_export.dart';
 import '../../screens/screens_export.dart';
 
 class RoutesGenerator {
-  static Route<dynamic> generateRoutes(RouteSettings settings) {
+  final BuildContext context;
+  final Key? key;
+  RoutesGenerator({required this.context, this.key});
+  factory RoutesGenerator.of(BuildContext context, {Key? key}) {
+    return RoutesGenerator(context: context, key: key);
+  }
+
+  Route<dynamic> generateRoutes(RouteSettings settings) {
     // final args = settings.arguments;
     switch (settings.name) {
       case RoutesName.homePage:

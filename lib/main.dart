@@ -37,11 +37,12 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       //THEME
       themeMode: themeMode,
-      theme: AppThemes.lightTheme,
-      darkTheme: AppThemes.darkTheme,
+      theme: AppThemes.of(context).lightTheme,
+      darkTheme: AppThemes.of(context).darkTheme,
       //ROUTES
       initialRoute: RoutesName.homePage,
-      onGenerateRoute: RoutesGenerator.generateRoutes,
+      onGenerateRoute: (settings) =>
+          RoutesGenerator.of(context).generateRoutes(settings),
       builder: EasyLoading.init(),
     );
   }
