@@ -57,7 +57,7 @@ class _PinKeyboardState extends State<PinKeyboard> {
     );
   }
 
-  _pinButton(
+  Padding _pinButton(
       {required void Function()? onPressed,
       required Widget? child,
       required Size size}) {
@@ -66,7 +66,8 @@ class _PinKeyboardState extends State<PinKeyboard> {
       child: ElevatedButton(
         onPressed: onPressed,
         style: ElevatedButton.styleFrom(
-          backgroundColor: widget.bgColor ?? widget.textColor!.withOpacity(0.2),
+          backgroundColor:
+              widget.bgColor ?? widget.textColor!.withValues(alpha: 0.2),
           shadowColor: Colors.transparent,
           shape: const CircleBorder(),
         ),

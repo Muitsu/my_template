@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 
 class CustomPageTransition {
   //CURVE ANIMATION
-  static curveToPage({required Widget page, Curve curve = Curves.easeOutExpo}) {
+  static PageRouteBuilder curveToPage(
+      {required Widget page, Curve curve = Curves.easeOutExpo}) {
     return PageRouteBuilder(
       transitionDuration: const Duration(milliseconds: 300),
       pageBuilder: (BuildContext context, Animation<double> animation,
@@ -25,7 +26,8 @@ class CustomPageTransition {
   }
 
   //SLIDE ANIMATION
-  static slideToPage({required Widget page, required SlideFrom slide}) {
+  static PageRouteBuilder slideToPage(
+      {required Widget page, required SlideFrom slide}) {
     return PageRouteBuilder(
       transitionsBuilder: (context, animation, secondaryAnimation, child) {
         return SlideTransition(

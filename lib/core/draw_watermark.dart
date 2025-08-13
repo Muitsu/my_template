@@ -104,7 +104,11 @@ class DrawWatermark {
   }
 
   static imag.Color _bgGetColor([Color color = Colors.white]) =>
-      imag.ColorRgba8(color.red, color.green, color.blue, color.alpha);
+      imag.ColorRgba8(
+          ((color.r * 255.0).round() & 0xff),
+          ((color.g * 255.0).round() & 0xff),
+          ((color.b * 255.0).round() & 0xff),
+          ((color.a * 255.0).round() & 0xff));
 }
 
 abstract class ImageFont {

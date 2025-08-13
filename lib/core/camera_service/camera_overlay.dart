@@ -35,26 +35,26 @@ class CameraOverlay extends StatelessWidget {
             alignment: Alignment.centerLeft,
             child: Container(
                 width: horizontalPadding,
-                color: bgColor ?? Colors.black.withOpacity(0.5))),
+                color: bgColor ?? Colors.black.withValues(alpha: 0.5))),
         Align(
             alignment: Alignment.centerRight,
             child: Container(
                 width: horizontalPadding,
-                color: bgColor ?? Colors.black.withOpacity(0.5))),
+                color: bgColor ?? Colors.black.withValues(alpha: 0.5))),
         Align(
             alignment: Alignment.topCenter,
             child: Container(
                 margin: EdgeInsets.only(
                     left: horizontalPadding, right: horizontalPadding),
                 height: verticalPadding,
-                color: bgColor ?? Colors.black.withOpacity(0.5))),
+                color: bgColor ?? Colors.black.withValues(alpha: 0.5))),
         Align(
             alignment: Alignment.bottomCenter,
             child: Container(
                 margin: EdgeInsets.only(
                     left: horizontalPadding, right: horizontalPadding),
                 height: verticalPadding,
-                color: bgColor ?? Colors.black.withOpacity(0.5))),
+                color: bgColor ?? Colors.black.withValues(alpha: 0.5))),
         Container(
           margin: EdgeInsets.symmetric(
               horizontal: horizontalPadding, vertical: verticalPadding),

@@ -6,7 +6,7 @@ import 'package:my_template/config/config_export.dart';
 import 'package:my_template/core/connectivity_helper.dart';
 import 'package:my_template/core/date_format.dart';
 import 'package:my_template/core/device_auth.dart';
-import 'package:my_template/core/mobile_info.dart';
+import 'package:my_template/core/device_info_service.dart';
 import 'package:my_template/screens/home/behance_profile.dart';
 import 'package:my_template/screens/no_internet_template.dart';
 import 'package:my_template/screens/shrink_appbar_screen.dart';
@@ -26,7 +26,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
     super.initState();
-    MobileInfo.init(context);
+    DeviceInfoService.init(context);
   }
 
   String dateNow = FormatDate.formatTo(

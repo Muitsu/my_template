@@ -102,8 +102,8 @@ class _BehanceStyleAppbarDelegate extends SliverPersistentHeaderDelegate {
                   border: Border(
                       bottom: BorderSide(
                           color: Colors.black12
-                              .withOpacity((1 - progress).clamp(0, 1))))
-                  // color: backgroundColor.withOpacity((1 - progress).clamp(0, 1)),
+                              .withValues(alpha: (1 - progress).clamp(0, 1))))
+                  // color: backgroundColor.withValues(alpha:(1 - progress).clamp(0, 1)),
                   ),
             ),
           ),
@@ -112,7 +112,7 @@ class _BehanceStyleAppbarDelegate extends SliverPersistentHeaderDelegate {
             duration: const Duration(milliseconds: 100),
             height: appBarHeight,
             constraints: const BoxConstraints(maxHeight: 200),
-            color: Colors.grey.withOpacity(0.2),
+            color: Colors.grey.withValues(alpha: 0.2),
           ),
           Padding(
             padding: leadingMargin,

@@ -1,7 +1,7 @@
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/material.dart';
 
-class MobileInfo {
+class DeviceInfoService {
   //Default value
   static String deviceModel = "Unknown";
   static String deviceManufacturer = "Unknown";
@@ -9,11 +9,11 @@ class MobileInfo {
   static String deviceOSVersion = 'Unknown';
   static String deviceName = "Unknown";
 
-  MobileInfo._();
+  DeviceInfoService._();
 
-  static final MobileInfo _instance = MobileInfo._();
+  static final DeviceInfoService _instance = DeviceInfoService._();
 
-  static MobileInfo get instance => _instance;
+  static DeviceInfoService get instance => _instance;
 
   static Future<void> init(BuildContext context) async {
     WidgetsBinding.instance.addPostFrameCallback((e) async {
@@ -37,11 +37,11 @@ class MobileInfo {
   }
 
   static String _getDeviceOS({required TargetPlatform platform}) {
-    final mobileInfo = {
+    final deviceInfo = {
       TargetPlatform.android: "Android",
       TargetPlatform.iOS: "iOS"
     };
-    return mobileInfo[platform] ?? "Unknown";
+    return deviceInfo[platform] ?? "Unknown";
   }
 
   static Future<String> _getDeviceOSVersion(

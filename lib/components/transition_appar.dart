@@ -94,7 +94,7 @@ class _TransitionAppBarDelegate extends SliverPersistentHeaderDelegate {
           child: Container(
             decoration: BoxDecoration(
               color: backgroundColor,
-              // color: backgroundColor.withOpacity((1 - progress).clamp(0, 1)),
+              // color: backgroundColor.withValues(alpha:(1 - progress).clamp(0, 1)),
             ),
           ),
         ),

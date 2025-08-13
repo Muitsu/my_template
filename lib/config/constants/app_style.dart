@@ -185,7 +185,7 @@ class CustomBoxDecoration extends BoxDecoration {
           boxShadow: withShadow
               ? [
                   BoxShadow(
-                    color: Colors.grey.withOpacity(0.5),
+                    color: Colors.grey.withValues(alpha: 0.5),
                     spreadRadius: 0,
                     blurRadius: 6,
                     offset: const Offset(0, 3),
@@ -201,7 +201,7 @@ class CustomBoxDecoration extends BoxDecoration {
           color: color ?? Colors.white,
           boxShadow: [
             BoxShadow(
-              color: Colors.grey.withOpacity(0.5),
+              color: Colors.grey.withValues(alpha: 0.5),
               spreadRadius: 0,
               blurRadius: 6,
               offset: const Offset(0, 3),
@@ -225,7 +225,7 @@ class CustomBoxDecoration extends BoxDecoration {
           color: color,
           boxShadow: [
             BoxShadow(
-              color: Colors.grey.withOpacity(0.5),
+              color: Colors.grey.withValues(alpha: 0.5),
               spreadRadius: 10,
               blurRadius: 6,
               offset: const Offset(0, 3),

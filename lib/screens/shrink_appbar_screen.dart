@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_template/components/modal/custom_modal_sheet.dart';
 import 'package:my_template/components/modal/sliver_overlap_builder.dart';
-import 'package:my_template/core/mobile_info.dart';
+import 'package:my_template/core/device_info_service.dart';
 
 import '../components/appbar/shrink_text_appbar.dart';
 
@@ -101,7 +101,7 @@ class _ShrinkAppbarScreenState extends State<ShrinkAppbarScreen> {
                         const CircleAvatar(radius: 30),
                         const SizedBox(height: 10),
                         Text(
-                          MobileInfo.deviceName,
+                          DeviceInfoService.deviceName,
                           style: const TextStyle(
                               color: Colors.white,
                               fontSize: 18,
@@ -109,10 +109,11 @@ class _ShrinkAppbarScreenState extends State<ShrinkAppbarScreen> {
                         ),
                         const SizedBox(height: 12),
                         _simpleTile(
-                            title: "Model", subtitle: MobileInfo.deviceModel),
+                            title: "Model",
+                            subtitle: DeviceInfoService.deviceModel),
                         _simpleTile(
                             title: "OS Version",
-                            subtitle: MobileInfo.deviceOSVersion),
+                            subtitle: DeviceInfoService.deviceOSVersion),
                         _simpleTile(
                             title: "Activation Name",
                             subtitle: "15 May 2025, 9:08 am"),

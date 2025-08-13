@@ -69,7 +69,7 @@ class NoInternetTemplate extends StatelessWidget {
       filter: ImageFilter.blur(sigmaX: 3.0, sigmaY: 3.0),
       child: Container(
         //you can change opacity with color here(I used black) for background.
-        decoration: BoxDecoration(color: Colors.grey.withOpacity(0.02)),
+        decoration: BoxDecoration(color: Colors.grey.withValues(alpha: 0.02)),
       ),
     );
   }

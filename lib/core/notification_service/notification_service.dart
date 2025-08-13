@@ -62,7 +62,7 @@ class NotificationService {
 
     return _notifications.periodicallyShow(
         id, title, body, repeatInterval, await _notificationsDetail(),
-        payload: payload);
+        payload: payload, androidScheduleMode: AndroidScheduleMode.alarmClock);
   }
 
   static Future setScheduledNotification({
@@ -85,8 +85,8 @@ class NotificationService {
       body,
       tz.TZDateTime.from(DateTime.now().add(difference), tz.local),
       await _notificationsDetail(),
-      uiLocalNotificationDateInterpretation:
-          UILocalNotificationDateInterpretation.absoluteTime,
+      // uiLocalNotificationDateInterpretation:
+      //     UILocalNotificationDateInterpretation.absoluteTime,
       androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
       payload: payload,
     );

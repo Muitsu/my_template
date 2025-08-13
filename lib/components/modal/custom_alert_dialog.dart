@@ -59,7 +59,7 @@ class _CustomAlertDialogState extends State<CustomAlertDialog> {
     return Text(widget.subtitle);
   }
 
-  gapHeight({double height = 10}) {
+  SizedBox gapHeight({double height = 10}) {
     return SizedBox(height: height);
   }
 
@@ -74,7 +74,7 @@ class _CustomAlertDialogState extends State<CustomAlertDialog> {
     ];
   }
 
-  _button(
+  Expanded _button(
       {required String title,
       required void Function()? onPressed,
       Color? color}) {

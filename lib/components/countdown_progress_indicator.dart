@@ -41,7 +41,7 @@ class CountdownProgressIndicatorState
     startCounter();
   }
 
-  startCounter() {
+  void startCounter() {
     if (DateTime.now().isAfter(widget.endDateTime)) {
       progress = 0;
       _timer = Timer(Duration.zero, () {});

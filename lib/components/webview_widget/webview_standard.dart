@@ -91,7 +91,7 @@ class _WebviewStandardState extends State<WebviewStandard> {
                   title: Text(
                     widget.title,
                     style: TextStyle(
-                        color: Colors.black87.withOpacity(0.8),
+                        color: Colors.black87.withValues(alpha: 0.8),
                         fontWeight: FontWeight.w600,
                         fontSize: 18),
                   ),
@@ -117,7 +117,7 @@ class _WebviewStandardState extends State<WebviewStandard> {
                         ))
                   ],
                   elevation: 1,
-                  shadowColor: Colors.black.withOpacity(0.3),
+                  shadowColor: Colors.black.withValues(alpha: 0.3),
                 ),
                 Visibility(
                   visible: _progress.toInt() < 1,
@@ -147,7 +147,7 @@ class _WebviewStandardState extends State<WebviewStandard> {
                       style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.w600,
-                          color: Colors.black87.withOpacity(0.6)),
+                          color: Colors.black87.withValues(alpha: 0.6)),
                     ),
                     TextButton(
                         onPressed: showErrMsg
@@ -168,7 +168,7 @@ class _WebviewStandardState extends State<WebviewStandard> {
     );
   }
 
-  linearProgressBar(double height, {required double value}) {
+  PreferredSize linearProgressBar(double height, {required double value}) {
     return PreferredSize(
       preferredSize: const Size.fromHeight(0),
       child: SizedBox(
@@ -183,7 +183,7 @@ class _WebviewStandardState extends State<WebviewStandard> {
     );
   }
 
-  showExitAlert(Size size) {
+  void showExitAlert(Size size) {
     showModalBottomSheet(
         context: context,
         isScrollControlled: true,
@@ -247,7 +247,7 @@ class _WebviewStandardState extends State<WebviewStandard> {
                                     return states.contains(WidgetState.pressed)
                                         ? Theme.of(context)
                                             .primaryColor
-                                            .withOpacity(0.08)
+                                            .withValues(alpha: 0.08)
                                         : null;
                                   },
                                 ),

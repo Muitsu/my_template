@@ -30,7 +30,7 @@ class _ImagePreviewDialogState extends State<ImagePreviewDialog> {
   Widget build(BuildContext context) {
     return GestureDetector(
       child: Material(
-        color: Colors.black.withOpacity(0.3),
+        color: Colors.black.withValues(alpha: 0.3),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.center,
@@ -91,7 +91,7 @@ class _ImagePreviewDialogState extends State<ImagePreviewDialog> {
     );
   }
 
-  _iconButton(
+  Column _iconButton(
       {required String title,
       bool isFilled = false,
       required IconData iconData,

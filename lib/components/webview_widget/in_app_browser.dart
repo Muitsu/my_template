@@ -133,7 +133,7 @@
 //                     ),
 //                   ],
 //                   elevation: 1,
-//                   shadowColor: Colors.black.withOpacity(0.3),
+//                   shadowColor: Colors.black.withValues(alpha:0.3),
 //                 ),
 //                 Visibility(
 //                   visible: _progress.toInt() < 1,
@@ -284,7 +284,7 @@
 //                                     return states.contains(WidgetState.pressed)
 //                                         ? Theme.of(context)
 //                                             .primaryColor
-//                                             .withOpacity(0.08)
+//                                             .withValues(alpha:0.08)
 //                                         : null;
 //                                   },
 //                                 ),

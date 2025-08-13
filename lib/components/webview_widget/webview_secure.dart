@@ -105,7 +105,7 @@ class _WebviewSecureState extends State<WebviewSecure> {
                     ),
                   ],
                   elevation: 1,
-                  shadowColor: Colors.black.withOpacity(0.3),
+                  shadowColor: Colors.black.withValues(alpha: 0.3),
                 ),
                 Visibility(
                   visible: _progress.toInt() < 1,
@@ -127,7 +127,7 @@ class _WebviewSecureState extends State<WebviewSecure> {
     );
   }
 
-  linearProgressBar(double height, {required double value}) {
+  PreferredSize linearProgressBar(double height, {required double value}) {
     return PreferredSize(
       preferredSize: const Size.fromHeight(0),
       child: SizedBox(
@@ -142,7 +142,7 @@ class _WebviewSecureState extends State<WebviewSecure> {
     );
   }
 
-  showExitAlert(Size size) {
+  void showExitAlert(Size size) {
     showModalBottomSheet(
         context: context,
         isScrollControlled: true,
@@ -206,7 +206,7 @@ class _WebviewSecureState extends State<WebviewSecure> {
                                     return states.contains(WidgetState.pressed)
                                         ? Theme.of(context)
                                             .primaryColor
-                                            .withOpacity(0.08)
+                                            .withValues(alpha: 0.08)
                                         : null;
                                   },
                                 ),
